@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <title>Ajax et PHP</title>
+</head>
+<body>
+
+    <div class="container mt-4">
+        <div class="row">
+            <div class="col-12 col-sm-10 col-md-5 mx-auto">
+
+                <h3 class="text-center display-4">
+                    Inscription à notre newsletter !
+                </h3>
+
+                <form id="newsletter" 
+                    action="newsletter.php" 
+                    method="post" novalidate>
+
+                    <div class="form-group">
+                        <input type="email" name="email"
+                            class="form-control"
+                            placeholder="Adresse Email." />
+                    </div>
+
+                    <div class="form-group">
+                        <input type="text" name="prenom"
+                            class="form-control"
+                            placeholder="Prénom." />
+                    </div>
+
+                    <div class="form-group">
+                        <input type="text" name="nom"
+                            class="form-control"
+                            placeholder="Nom." />
+                    </div>
+
+                    <div class="form-group">
+                        <button class="btn btn-block btn-dark">
+                            M'inscrire !
+                        </button>
+                    </div>
+
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <!-- jQuery -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script>
+    <!-- Validation de la newsletter -->
+    <script src="./assets/js/newsletter.js"></script>
+</body>
+</html>

@@ -39,6 +39,16 @@
             // 2. GetJSON, encore plus simple !
             $.getJSON('https://ipapi.co/json/', function(data) {
                 // console.log( data );
+
+                // Avec append :
+                $('form').append(`
+                    <p>
+                        Votre IP est surveillée : ${data.ip}
+                        <br> ${data.city} - ${data.region}
+                    </p>
+                `);
+
+                // Avec appendTo
                 $(`
                     <p>
                         Votre IP est surveillée : ${data.ip}

@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <title>Exercice 2</title>
+    
+    <link href="https://fonts.googleapis.com/css?family=Roboto+Slab" rel="stylesheet">
+    
+    <style>
+    
+        main {
+            max-width: 990px;
+            width: 100%;
+            height: auto;
+            margin: 0 auto;
+        }
+        
+        section {
+            width: 100%;
+            height: auto;
+            min-height: 200px;
+            margin-bottom: 10px;
+            background-image: linear-gradient(0deg, #EEE 0%, #FFF 100%);
+            border: 1px solid #EEE;
+        }
+        
+        h1 {
+            font-family: 'Roboto Slab', serif;
+            font-weight: normal;
+            text-align: center;
+            color: #000;
+        }
+        
+        article {
+            font-family: Arial, sans-serif;
+            font-size: 14px;
+            padding: 20px;
+            box-sizing: border-box;
+        }
+        
+        input[type=text] {
+            width: 100%;
+            height: 30px;
+            background-image: linear-gradient(0deg, #EEE 0%, #FFF 100%);
+            border:1px solid #EEE;
+            font-family: 'Roboto Slab', serif;
+            font-size: 14px;
+            text-indent: 10px;
+            margin-bottom: 10px;
+        }
+        mark{
+            background: orange;
+            color: black;
+        }
+    
+    </style>
+</head>
+<body>
+    <!-- CONSIGNE : Avec l'aide de jQuery, vous devrez :
+    
+       1. Définir une structure HTML5 & CSS3 pour afficher des articles.
+       
+       2. Afficher une liste d'articles à partir de l'API :  https://jsonplaceholder.typicode.com/posts
+       
+       3. BONUS : Afficher uniquement les 10 premiers articles.
+       
+       4. BONUS : Mettre en Place Markjs.io afin de surligner des mots dans les différents articles à l'aide d'un champ input.
+     
+    -->
+
+    <main>
+        <input type="text" placeholder="Saisissez un terme à surligner..." id="markJS">
+        <!--<section>
+            <header>
+                <h1>TITRE</h1>
+            </header>
+            <article>
+                MON CONTENU
+            </article>
+        </section>-->
+    </main>
+   
+    <!-- Intégration de jQuery -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script>
+
+    <!-- Intégration de MarkJS -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/mark.js/8.11.1/jquery.mark.min.js" integrity="sha256-4HLtjeVgH0eIB3aZ9mLYF6E8oU5chNdjU6p6rrXpl9U=" crossorigin="anonymous"></script>
+    
+    <script>
+        // -- En Attente de jQuery
+        $(function() {
+            
+            console.log('jQuery is ready to Rock !');
+
+            // 1. Récupération des articles de l'API.
+            $.getJSON('https://jsonplaceholder.typicode.com/posts', 
+            function( articles ) {
+                
+                // 2. Je  m'assure de bien récupérer les données de l'API.
+                console.log( articles );
+
+                // 3. Boucle pour parcourir mes articles
+                $.each(articles, function ( indice, article ) {
+
+                    // 4. Afficher dans le HTML. Pour chaque article de mon tableau, je vais ajouter à un article a ma page.
+                    $(`
+                        <section>
+                            <header>
+                                <h1>${article.title}</h1>
+                            </header>
+                            <article>
+                                ${article.body}
+                            </article>
+                        </section>
+                    `).appendTo('main');
+
+                    // Je m'arrête au 5ème article
+                    if(indice === 4) {
+                        return false;
+                    }
+
+                }); // end $.each
+
+            }); // end $.getJSON
+
+            // --------------------- MarkJS
+
+            // 1. Récupérer la valeur saisie par l'utilisateur dans le champ input#markJS
+
+            // 1.a : Je cible l'élément que je veux écouter.
+            // 1.b : Grâce à la fonction .on() je peux écouter un event.
+            $('#markJS').on('input', function() {
+                
+                // Cette fonction anonyme va s'executer à chaque fois que l'utilisateur va appuyer sur une touche du clavier.
+
+                // Afficher la saisie de l'utilisateur dans la console.
+                console.log( $('#markJS').val() );
+
+                // 2. Surligner la saisie de l'utilisateur
+                let keyword = $('#markJS').val();
+                $('section').unmark().mark( keyword );
+
+            });
+
+        }); // end $(function(){})
+    </script>
+    
+</body>
+</html>
